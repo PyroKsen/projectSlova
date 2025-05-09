@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'; // Используем import вместо require
+import { app, BrowserWindow } from 'electron';
 import pg from 'pg';
 
 const createWindow = () => {
@@ -18,28 +18,10 @@ app.whenReady().then(() => {
   createWindow();
 });
 
-const client = new pg.Client({
+export const client = new pg.Client({
   user: 'admin',
   host: 'localhost',
   database: 'slovadb',
-  password: '1234',
+  password: '123',
   port: 5432,
-});
-
-client.connect(function (err) {
-  if (err) {
-    console.error('error connecting:', err);
-    return;
-  }
-  console.log('connected');
-
-  // Запрос к базе данных
-  client.query('SELECT * FROM player', function (err, result) {
-    if (err) {
-      console.error('error running query:', err);
-    } else {
-      console.log(result.rows);
-    }
-    client.end();
-  });
 });

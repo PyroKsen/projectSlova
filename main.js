@@ -37,22 +37,70 @@ client.connect(function (err) {
   console.log('connected');
 });
 
-
-const prikol = () => {
+//СЕССИЯ
+const dataSessionFu = () => {
   return new Promise((resolve) => {
     client.query('SELECT * FROM session', (_, result) => {
-      resolve(result.rows); // Разрешаем промис с полученными данными
+      resolve(result.rows);
     });
   });
 }
 
 ipcMain.on('getdataBaseSession', async (event) => {
-  const dataSession = await prikol(); // Ждем, пока промис выполнится
+  const dataSession = await dataSessionFu();
   console.log(dataSession)
   event.returnValue = dataSession
 });
 
 ipcMain.on('pushSession', async (event, text, values) => {
+  const res = await client.query(text, values)
+  event.returnValue = 'ok'
+});
+//PLAYER
+const dataPlayerFu = () => {
+  return new Promise((resolve) => {
+    client.query('SELECT * FROM player', (_, result) => {
+      resolve(result.rows);
+    });
+  });
+}
+
+ipcMain.on('getdataBasePlayer', async (event) => {
+  const dataSession = await dataPlayerFu();
+  console.log(dataSession)
+  event.returnValue = dataSession
+});
+
+ipcMain.on('pushPlayer1', async (event, text, values) => {
+  const res = await client.query(text, values)
+  event.returnValue = 'ok'
+});
+
+ipcMain.on('pushPlayer2', async (event, text, values) => {
+  const res = await client.query(text, values)
+  event.returnValue = 'ok'
+});
+// PLAYER_SESSION
+// const dataPlayerSessionFu = () => {
+//   return new Promise((resolve) => {
+//     client.query('SELECT * FROM player_session', (_, result) => {
+//       resolve(result.rows);
+//     });
+//   });
+// }
+
+// ipcMain.on('getdataBasePlayerSession', async (event) => {
+//   const dataSession = await dataPlayerSessionFu();
+//   console.log(dataSession)
+//   event.returnValue = dataSession
+// });
+
+ipcMain.on('pushPlayerSession1', async (event, text, values) => {
+  const res = await client.query(text, values)
+  event.returnValue = 'ok'
+});
+
+ipcMain.on('pushPlayerSession2', async (event, text, values) => {
   const res = await client.query(text, values)
   event.returnValue = 'ok'
 });

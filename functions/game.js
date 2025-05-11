@@ -1,5 +1,4 @@
 const { ipcRenderer } = require('electron'); // Импортируем ipcRenderer
-const { text } = require('express');
 let datesb = []
 
 function getWordsBySessionId(sessionId, database) {
@@ -15,14 +14,27 @@ function getIdByUsername(username, players) {
     return player ? player.player_id : null;
 }
 function checkWordExists(word, database) {
-    return database.some(entry => entry.word === word);
+    if (database === null) {
+        return false
+    } else {
+        return database.some(entry => entry.word === word);
+    }
 }
+function displayWords(database, playerName) {
+    const wordsContainer = document.getElementById('wordsContainer');
 
+    if (database.length > 0) {
+        const lastEntry = database[database.length - 1];
+        const wordElement = document.createElement('div');
+        wordElement.className = 'word';
+        wordElement.textContent = `${playerName}: ${lastEntry.word}`
+        wordsContainer.appendChild(wordElement);
+    }
+}
 document.addEventListener("DOMContentLoaded", function() {
-    const dates = ipcRenderer.sendSync('getmass'); //1-id1 2-id2 3-ids
+    const dates = ipcRenderer.sendSync('getmass');
     const databasePlayer = ipcRenderer.sendSync('getdataBasePlayer')
     const databaseWordlist = ipcRenderer.sendSync('getdataWordlist');
-    const dlinaBDwordlist = databaseWordlist.length
     datesb.push(dates[0])
     datesb.push(dates[1])
     datesb.push(dates[2])
@@ -35,18 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const result = getWordsBySessionId(ids, databaseWordlist)
     if (result === null) {
-        const w1 = 'начало'
-        const w2 = 'окончание'
-        const dlinaFor1p = dlinaBDwordlist + 1
-        const dlinaFor2p = dlinaBDwordlist + 2
-        const text1 = 'INSERT INTO wordlist(word_id, word, session_id, player_id) VALUES($1, $2, $3, $4) RETURNING *'
-        const values1 = [`${dlinaFor1p}`, `${w1}`, `${ids}`, `${id1}`]
-        const text2 = 'INSERT INTO wordlist(word_id, word, session_id, player_id) VALUES($1, $2, $3, $4) RETURNING *'
-        const values2 = [`${dlinaFor2p}`, `${w2}`, `${ids}`, `${id2}`]
-        const word1 = ipcRenderer.sendSync('pushWordPlayer1', text1, values1);
-        const word2 = ipcRenderer.sendSync('pushWordPlayer2', text2, values2);
         document.getElementById('playerName').textContent = pname1;
-        console.log(word1, word2)
     } else (
         console.log('error, слова в бд откуда взялись')
     )
@@ -101,6 +102,9 @@ function enter() {
                 const values1 = [`${wordId}`, `${wordInput}`, `${ids}`, `${playerId}`]
                 const word = ipcRenderer.sendSync('pushWord', text1, values1);
                 console.log(word, 'ok1')
+                const databaseWordlist2 = ipcRenderer.sendSync('getdataWordlist');
+                const result2 = getWordsBySessionId(ids, databaseWordlist2)
+                displayWords(result2, playerName)
                 playerNameBoard.textContent = pname2
                 document.getElementById('wordInput').value = ''
             } else if (playerName === pname2) {
@@ -108,6 +112,9 @@ function enter() {
                 const values1 = [`${wordId}`, `${wordInput}`, `${ids}`, `${playerId}`]
                 const word = ipcRenderer.sendSync('pushWord', text1, values1);
                 console.log(word, 'ok2')
+                const databaseWordlist2 = ipcRenderer.sendSync('getdataWordlist');
+                const result2 = getWordsBySessionId(ids, databaseWordlist2)
+                displayWords(result2, playerName)
                 playerNameBoard.textContent = pname1
                 document.getElementById('wordInput').value = ''
             }

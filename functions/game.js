@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const id1 = dates[0]
     const id2 = dates[1]
     const ids = dates[2]
-
+    document.getElementById('sessionId').textContent = ids
     const pname1 = getUsernameById(id1, databasePlayer)
     const pname2 = getUsernameById(id2, databasePlayer)
 
@@ -62,12 +62,10 @@ function enter() {
         const ids = datesb[2]
         const id2 = datesb[1]
         const id1 = datesb[0]
-        document.getElementById('sessionId').textContent = ids
         const playerName = playerNameBoard.textContent
         const databasePlayer = ipcRenderer.sendSync('getdataBasePlayer')
         const pname1 = getUsernameById(id1, databasePlayer)
         const pname2 = getUsernameById(id2, databasePlayer)
-
         const databaseWordlist = ipcRenderer.sendSync('getdataWordlist');
         const result = getWordsBySessionId(ids, databaseWordlist)
         console.log(result)
@@ -79,7 +77,7 @@ function enter() {
             message.textContent = 'Слово не может быть меньше чем из 2х букв!'
             message.style.color = 'red';
             return
-        } else if (wordInput.length === 'null' || wordInput.length === 'undefined') {
+        } else if (wordInput === 'null' || wordInput === 'undefined') {
             message.textContent = 'Слово не может быть c таким значением!'
             message.style.color = 'red';
             return

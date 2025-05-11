@@ -104,6 +104,39 @@ ipcMain.on('pushPlayerSession2', async (event, text, values) => {
   const res = await client.query(text, values)
   event.returnValue = 'ok'
 });
+//DATES
+let id1
+let id2
+let ids
+let mass = []
+ipcMain.on('datesForGame', (event, idPl1, idPl2, sessionId) => {
+  id1 = idPl1
+  id2 = idPl2
+  ids = sessionId
+  mass.push(id1)
+  mass.push(id2)
+  mass.push(ids)
+  event.returnValue = 'ok'
+});
+
+ipcMain.on('getmass', async (event) => {
+  event.returnValue = mass
+});
+
+// WORDLIST
+const dataWordlistFu = () => {
+  return new Promise((resolve) => {
+    client.query('SELECT * FROM wordlist', (_, result) => {
+      resolve(result.rows);
+    });
+  });
+}
+
+ipcMain.on('getdataWordlist', async (event) => {
+  const dataSession = await dataWordlistFu();
+  console.log(dataSession)
+  event.returnValue = dataSession
+});
 
 
 app.whenReady().then(createWindow)

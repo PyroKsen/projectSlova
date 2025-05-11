@@ -65,7 +65,6 @@ function createPlayer() {
 }
 function goGame() {
     document.getElementById('goGameButton').addEventListener('click', function(event) {
-        event.preventDefault()
 
         const nI1 = document.getElementById('nameInput1').value.trim();
         const nI2 = document.getElementById('nameInput2').value.trim();
@@ -91,10 +90,14 @@ function goGame() {
         const iidp1 = idp1(nI1)
         const iidp2 = idp2(nI2)
         console.log(iidp1, iidp2)
+        let idPl1 = iidp1
+        let idPl2 = iidp1
 
         if (iidp1 && iidp2) {
             const values1 = [`${iidp1}`, `${sessionId}`]
             const values2 = [`${iidp2}`, `${sessionId}`]
+            idPl1 = iidp1
+            idPl2 = iidp2
             const ok1 = ipcRenderer.sendSync('pushPlayerSession1', text1, values1);
             const ok2 = ipcRenderer.sendSync('pushPlayerSession2', text2, values2);
             console.log(ok1, ok2, '11')
@@ -102,6 +105,8 @@ function goGame() {
             const ipPlayer1 = dataBasePlayer.length - 0
             const values1 = [`${ipPlayer1}`, `${sessionId}`]
             const values2 = [`${iidp2}`, `${sessionId}`]
+            idPl1 = ipPlayer1
+            idPl2 = iidp2
             const ok1 = ipcRenderer.sendSync('pushPlayerSession1', text1, values1);
             const ok2 = ipcRenderer.sendSync('pushPlayerSession2', text2, values2);
             console.log(ok1, ok2, '01')
@@ -109,6 +114,8 @@ function goGame() {
             const ipPlayer2 = dataBasePlayer.length - 0
             const values1 = [`${iidp1}`, `${sessionId}`]
             const values2 = [`${ipPlayer2}`, `${sessionId}`]
+            idPl1 = iidp1
+            idPl2 = ipPlayer2
             const ok1 = ipcRenderer.sendSync('pushPlayerSession1', text1, values1);
             const ok2 = ipcRenderer.sendSync('pushPlayerSession2', text2, values2);
             console.log(ok1, ok2, '10')
@@ -117,10 +124,14 @@ function goGame() {
             const ipPlayer2 = dataBasePlayer.length - 0
             const values1 = [`${ipPlayer1}`, `${sessionId}`]
             const values2 = [`${ipPlayer2}`, `${sessionId}`]
+            idPl1 = ipPlayer1
+            idPl2 = ipPlayer2
             const ok1 = ipcRenderer.sendSync('pushPlayerSession1', text1, values1);
             const ok2 = ipcRenderer.sendSync('pushPlayerSession2', text2, values2);
             console.log(ok1, ok2, '00')
         }
+        const datesForGame = ipcRenderer.sendSync('datesForGame', idPl1, idPl2, sessionId)
+        console.log(datesForGame)
         document.getElementById('goGameButton').disabled = true
     })
 }

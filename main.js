@@ -138,5 +138,19 @@ ipcMain.on('getdataWordlist', async (event) => {
   event.returnValue = dataSession
 });
 
+ipcMain.on('pushWordPlayer1', async (event, text, values) => {
+  const res = await client.query(text, values)
+  event.returnValue = 'ok'
+});
+
+ipcMain.on('pushWordPlayer2', async (event, text, values) => {
+  const res = await client.query(text, values)
+  event.returnValue = 'ok'
+});
+
+ipcMain.on('pushWord', async (event, text, values) => {
+  const res = await client.query(text, values)
+  event.returnValue = 'ok'
+});
 
 app.whenReady().then(createWindow)

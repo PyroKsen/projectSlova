@@ -72,19 +72,23 @@ function enter() {
 
         const check = checkWordExists(wordInput, result)
 
-        if (wordInput.length < 1) {
+        if (wordInput.length < 2) {
+            console.log(wordInput.length)
             message.textContent = 'Слово не может быть меньше чем из 2х букв!'
             message.style.color = 'red';
             return
-        } else if (wordInput.length === null || wordInput.length === undefined) {
+        } else if (wordInput.length === 'null' || wordInput.length === 'undefined') {
             message.textContent = 'Слово не может быть c таким значением!'
             message.style.color = 'red';
             return
         } else if (check === true) {
+            console.log(wordInput.length)
             message.textContent = 'Такое слово уже есть!'
             message.style.color = 'red';
             return
         } else {
+            message.textContent = 'Great!'
+            message.style.color = 'green';
             const dlinaBDwordlist = databaseWordlist.length
 
             const wordId = dlinaBDwordlist + 1

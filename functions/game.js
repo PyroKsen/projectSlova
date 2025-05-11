@@ -62,6 +62,7 @@ function enter() {
         const ids = datesb[2]
         const id2 = datesb[1]
         const id1 = datesb[0]
+        document.getElementById('sessionId').textContent = ids
         const playerName = playerNameBoard.textContent
         const databasePlayer = ipcRenderer.sendSync('getdataBasePlayer')
         const pname1 = getUsernameById(id1, databasePlayer)

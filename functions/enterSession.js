@@ -6,6 +6,7 @@ function setupEventListener() {
 
         const dataBaseSession = ipcRenderer.sendSync('getdataBaseSession');
         const idInput = document.getElementById('idInput').value;
+        const inButton = document.getElementById('inButton');
         const passwordInput = document.getElementById('passwordInput').value;
         const messageDiv = document.getElementById('message');
 
@@ -20,18 +21,25 @@ function setupEventListener() {
         const sessionEntry = dataBaseSession.find(entry => entry.session_id === sessionId);
 
         if (sessionEntry) {
-            console.log(dataBaseSession.length)
             if (sessionEntry.password === null && (passwordInput.trim() === '' || passwordInput.trim() === null)) {
                 messageDiv.textContent = 'Верно (пароль не установлен).';
                 messageDiv.style.color = 'green';
+                const sesId = ipcRenderer.sendSync('getSesId', idInput);
+                inButton.disabled = false
+                console.log(sesId)
             } else if (sessionEntry.password === passwordInput.trim()) {
                 messageDiv.textContent = 'Верно';
                 messageDiv.style.color = 'green';
+                const sesId = ipcRenderer.sendSync('getSesId', idInput);
+                inButton.disabled = false
+                console.log(sesId)
             } else {
+                inButton.disabled = true
                 messageDiv.textContent = `Почти верно, только пароль к этому ID: ${sessionEntry.password}`;
                 messageDiv.style.color = 'red';
             }
         } else {
+            inButton.disabled = true
             messageDiv.textContent = 'Неверный ID';
             messageDiv.style.color = 'red';
         }

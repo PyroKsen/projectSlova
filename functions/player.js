@@ -32,6 +32,10 @@ function createPlayer() {
             messageForPlayers.textContent = 'Переименуйтесь либо заполните оба поля!'
             messageForPlayers.style.color = 'red'
             return
+        } else if (nI1 === nI2) {
+            messageForPlayers.textContent = 'Не может быть 2х одинаковых имён!'
+            messageForPlayers.style.color = 'red'
+            return
         } else if (idp1(nI1) && idp2(nI2)) {
             messageForPlayers.textContent = 'Игроки уже созданы!'
             messageForPlayers.style.color = 'green'

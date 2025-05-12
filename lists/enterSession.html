@@ -1,17 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../styles/enterSession.css" />
     <title>Проверка ID</title>
-</head>
-<body>
-    <input type="text" id="idInput" placeholder="Введите ID">
-    <input type="text" id="passwordInput" placeholder="Введите пароль">
-    <button id="checkButton">Проверить ID</button>
-    <a href="../lists/gameInSession.html"><button id="inButton" disabled="true">войти</button></a>
-    <div id="message"></div>
+  </head>
+  <body>
+    <div class="container">
+      <i class="square"> </i>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="form" action="#">
+        <div class="form-field">
+          <input id="idInput" type="text" placeholder=" " autofill="off" />
+          <span class="label" autofill="off"> Введите ID </span>
+        </div>
+        <div class="form-field">
+          <input id="passwordInput" type="password" placeholder=" " autofill="off" />
+          <span class="label" autofill="off"> Введите пароль </span>
+        </div>
+        <div class="errorText" id="message"></div>
+        <div class="buttonContainer">
+          <div id="createButton" class="containerbtn">
+            <button class="btn" id="checkButton">Проверить ID</button>
+          </div>
+          <div id="createButton" class="containerbtn">
+            <a href="../lists/gameInSession.html"
+              ><button class="btn" id="inButton" disabled>Войти</button></a
+            >
+          </div>
+        </div>
+      </div>
 
-    <script src="../functions/enterSession.js"></script>
-</body>
+      <script src="../functions/enterSession.js"></script>
+    </div>
+  </body>
 </html>

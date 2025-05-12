@@ -11,15 +11,9 @@ body {
   overflow: hidden;
 }
 
-.buttons {
+.containerbtn {
   display: flex;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-75%, -50%);
-  text-transform: uppercase;
-  font-size: 35px;
-  gap: 30%;
+  justify-content: center;
 }
 
 .square {
@@ -109,17 +103,9 @@ body {
   left: 60%;
   animation-delay: 7s;
 }
-
-.containerbtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-a {
+button {
   font-size: 1.5rem;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   color: #f4f4f4;
   text-transform: uppercase;
 }
@@ -150,4 +136,80 @@ a {
 
 .btn:hover:before {
   left: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  min-width: 288px;
+  background-color: white;
+  padding: 50px;
+  border-radius: 5px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form input {
+  outline: none;
+}
+
+.form input[type='text'],
+.form input[type='password'] {
+  padding: 1rem;
+  padding-bottom: 0.6rem;
+  width: 100%;
+  border: none;
+  border-bottom: 3px solid #000;
+  font-family: 'Poppins';
+  transition: border 0.3s ease;
+}
+
+.label {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.form input:focus + .label,
+.form input:not(:placeholder-shown) + .label {
+  top: -0.2rem;
+  color: #be0027;
+  font-size: 0.8rem;
+}
+
+.form input:focus {
+  border-bottom: 3px solid #be0027;
+}
+
+.errorText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 30px;
+}
+
+button:disabled {
+  background-color: rgb(135 139 150);
 }

@@ -1,17 +1,46 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../styles.css">
-    <title>Проверка ID</title>
-</head>
-<body>
-    <input type="text" id="nameInput1" placeholder="Введите никнейм 1-го игрока">
-    <input type="text" id="nameInput2" placeholder="Введите никнейм 2-го игрока">
-    <button id="createPlayerButton">Проверить</button>
-    <a href="../lists/game.html"><button disabled="true" id="goGameButton">Играть</button></a>
-    <div id="messageForPlayers"></div>
 
-    <script src="../functions/player.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../styles/enterSession.css" />
+    <title>Добавление игроков</title>
+</head>
+
+<body>
+    <div class="container">
+        <i class="square"> </i>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="form" action="#">
+            <div class="form-field">
+                <input id="nameInput1" type="text" placeholder=" " autofill="off" />
+                <span class="label" autofill="off"> Введите никнейм 1-го игрока </span>
+            </div>
+            <div class="form-field">
+                <input id="nameInput2" type="text" placeholder=" " autofill="off" />
+                <span class="label" autofill="off"> Введите никнейм 2-го игрока </span>
+            </div>
+            <div class="errorText" id="messageForPlayers"></div>
+            <div class="buttonContainer">
+                <div class="containerbtn">
+                    <button class="btn" id="createPlayerButton">Проверить</button>
+                </div>
+                <div id="createButton" class="containerbtn">
+                    <a href="../lists/game.html"><button class="btn" id="goGameButton" disabled>Войти</button></a>
+                </div>
+            </div>
+        </div>
+
+        <script src="../functions/player.js"></script>
+    </div>
 </body>
+
 </html>

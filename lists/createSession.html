@@ -1,14 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../styles.css">
-    <title>Проверка ID</title>
-</head>
-<body>
-    <input type="text" id="createPasswordInput" placeholder="Введите пароль для создания">
-    <a href="../lists/player.html"><button id="createSessionButton">создать</button></a>
 
-    <script src="../functions/createSession.js"></script>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../styles/createSession.css" />
+    <title>Создание сессии</title>
+</head>
+
+<body>
+    <div class="container">
+        <i class="square"> </i>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="square"></div>
+        <div class="form" action="#">
+            <div class="form-field">
+                <input id="createPasswordInput" type="password" placeholder=" " autofill="off" />
+                <span class="label" autofill="off"> Введите пароль для создания </span>
+            </div>
+            <div id="createButton" class="containerbtn">
+                <a href="../lists/player.html">
+                    <button id="createSessionButton" class="btn">создать</button>
+                </a>
+            </div>
+        </div>
+
+        <script src="../functions/createSession.js"></script>
+    </div>
 </body>
+
 </html>

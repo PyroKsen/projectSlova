@@ -1,21 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../styles.css">
-    <title>Проверка ID</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/gameSession.css" />
+    <title>Игра</title>
 </head>
-<body>
-    <div id="session">
-        <p>session id:</p>
-        <p id="sessionId"></p>
-    </div>
-    <div id="playerName"></div>
-    <input type="text" id="wordInput" placeholder="Введите слово">
-    <button id="wordInputButton">ввод</button>
-    <div id="messageForPlayer">Предупреждение)</div>
-    <div id="wordsContainer"></div>
 
+<body>
+    <div>
+        <div class="chatContainer">
+            <header>
+                <div id="session">
+                    <p>session id:</p>
+                    <p id="sessionId"></p>
+                </div>
+                <p>Очередь игрока - <span id="playerName"></span></p>
+            </header>
+            <div class="chatInner">
+                <div id="wordsContainer">
+                </div>
+            </div>
+        </div>
+        <div id="messageForPlayer"></div>
+        <div>
+            <div class="inputChat">
+                <input type="text" id="wordInput" placeholder="Введите слово">
+                <button id="wordInputButton">></button>
+            </div>
+        </div>
+    </div>
     <script src="../functions/game.js"></script>
 </body>
+
 </html>

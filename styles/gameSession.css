@@ -1,0 +1,101 @@
+html {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.chatContainer {
+    margin: auto;
+    width: 90%;
+    max-width: 1200px;
+
+    background: #dfdfdf;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #a2caff;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid rgba(129, 129, 129, 0.21);
+    border-radius: 10px 10px 0px 0px;
+    font-size: 25px;
+}
+
+#session {
+    display: inline-flex;
+}
+
+#wordInput {
+    width: 92%;
+    height: 50%;
+    top: 950px;
+
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+
+}
+
+#wordInputButton {
+    width: 30px;
+    height: 30px;
+}
+
+#messageForPlayer {
+    color: red;
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.inputChat {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #525252;
+    margin-top: 20px;
+    height: 60px;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    gap: 10px;
+    width: 90%;
+    max-width: 1200px;
+    padding: 0px 10px;
+}
+
+.word {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 60px;
+    background: #82b4f5;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-size: 25px;
+    padding: 10px 0px;
+}
+
+#wordsContainer {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    padding: 40px 20px;
+    height: 650px;
+    overflow-y: auto;
+}
+
+.word:nth-child(even) {
+    margin-left: auto;
+}

@@ -2,18 +2,18 @@ import { app, BrowserWindow, ipcMain } from 'electron';
 import pg from 'pg';
 
 const createWindow = () => {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-          nodeIntegration: true,
-          contextIsolation: false
-      }
-    });
+  const win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
 
-    win.loadFile('index.html');
-    win.webContents.openDevTools();
-};           
+  win.loadFile('index.html');
+  // win.webContents.openDevTools();
+};
 
 const client = new pg.Client({
   user: 'admin',
@@ -38,17 +38,17 @@ const dataSessionFu = () => {
       resolve(result.rows);
     });
   });
-}
+};
 
 ipcMain.on('getdataBaseSession', async (event) => {
   const dataSession = await dataSessionFu();
-  console.log(dataSession)
-  event.returnValue = dataSession
+  console.log(dataSession);
+  event.returnValue = dataSession;
 });
 
 ipcMain.on('pushSession', async (event, text, values) => {
-  const res = await client.query(text, values)
-  event.returnValue = 'ok'
+  const res = await client.query(text, values);
+  event.returnValue = 'ok';
 });
 
 //PLAYER
@@ -58,26 +58,25 @@ const dataPlayerFu = () => {
       resolve(result.rows);
     });
   });
-}
+};
 
 ipcMain.on('getdataBasePlayer', async (event) => {
   const dataSession = await dataPlayerFu();
-  console.log(dataSession)
-  event.returnValue = dataSession
+  console.log(dataSession);
+  event.returnValue = dataSession;
 });
 
 ipcMain.on('pushPlayer1', async (event, text, values) => {
-  const res = await client.query(text, values)
-  event.returnValue = 'ok'
+  const res = await client.query(text, values);
+  event.returnValue = 'ok';
 });
 
 ipcMain.on('pushPlayer2', async (event, text, values) => {
-  const res = await client.query(text, values)
-  event.returnValue = 'ok'
+  const res = await client.query(text, values);
+  event.returnValue = 'ok';
 });
 
 // PLAYER_SESSION
-
 
 const dataPlayerSessionFu = (sessionId) => {
   return new Promise((resolve) => {
@@ -85,51 +84,51 @@ const dataPlayerSessionFu = (sessionId) => {
       resolve(result.rows);
     });
   });
-}
+};
 
 ipcMain.on('getdataBasePlayerSession', async (event, sessionId) => {
   const dataSession = await dataPlayerSessionFu(sessionId);
-  console.log(dataSession)
-  event.returnValue = dataSession
+  console.log(dataSession);
+  event.returnValue = dataSession;
 });
 
 ipcMain.on('pushPlayerSession1', async (event, text, values) => {
-  const res = await client.query(text, values)
-  event.returnValue = 'ok'
+  const res = await client.query(text, values);
+  event.returnValue = 'ok';
 });
 
 ipcMain.on('pushPlayerSession2', async (event, text, values) => {
-  const res = await client.query(text, values)
-  event.returnValue = 'ok'
+  const res = await client.query(text, values);
+  event.returnValue = 'ok';
 });
 
 //DATES
-let id1
-let id2
-let ids
-let mass = []
+let id1;
+let id2;
+let ids;
+let mass = [];
 ipcMain.on('datesForGame', (event, idPl1, idPl2, sessionId) => {
-  id1 = idPl1
-  id2 = idPl2
-  ids = sessionId
-  mass.push(id1)
-  mass.push(id2)
-  mass.push(ids)
-  event.returnValue = 'ok'
+  id1 = idPl1;
+  id2 = idPl2;
+  ids = sessionId;
+  mass.push(id1);
+  mass.push(id2);
+  mass.push(ids);
+  event.returnValue = 'ok';
 });
 
-let sId
+let sId;
 ipcMain.on('getSesId', async (event, sesId) => {
-  sId = sesId
-  event.returnValue = 'ok'
+  sId = sesId;
+  event.returnValue = 'ok';
 });
 
 ipcMain.on('getSid', async (event) => {
-  event.returnValue = sId
+  event.returnValue = sId;
 });
 
 ipcMain.on('getmass', async (event) => {
-  event.returnValue = mass
+  event.returnValue = mass;
 });
 
 // WORDLIST
@@ -139,17 +138,17 @@ const dataWordlistFu = () => {
       resolve(result.rows);
     });
   });
-}
+};
 
 ipcMain.on('getdataWordlist', async (event) => {
   const dataSession = await dataWordlistFu();
-  console.log(dataSession)
-  event.returnValue = dataSession
+  console.log(dataSession);
+  event.returnValue = dataSession;
 });
 
 ipcMain.on('pushWord', async (event, text, values) => {
-  const res = await client.query(text, values)
-  event.returnValue = 'ok'
+  const res = await client.query(text, values);
+  event.returnValue = 'ok';
 });
 
 const dataWorldBySessionFu = (sessionId) => {
@@ -158,12 +157,12 @@ const dataWorldBySessionFu = (sessionId) => {
       resolve(result.rows);
     });
   });
-}
+};
 
 ipcMain.on('getdataWorldBySession', async (event, sessionId) => {
   const dataSession = await dataWorldBySessionFu(sessionId);
-  console.log(dataSession)
-  event.returnValue = dataSession
+  console.log(dataSession);
+  event.returnValue = dataSession;
 });
 
 const dataPlayersByIdFu = (playerid) => {
@@ -172,12 +171,12 @@ const dataPlayersByIdFu = (playerid) => {
       resolve(result.rows);
     });
   });
-}
+};
 
 ipcMain.on('getdataPlayersById', async (event, playerid) => {
   const dataSession = await dataPlayersByIdFu(playerid);
-  console.log(dataSession)
-  event.returnValue = dataSession
+  console.log(dataSession);
+  event.returnValue = dataSession;
 });
 
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);

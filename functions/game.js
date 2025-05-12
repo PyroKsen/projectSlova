@@ -68,12 +68,10 @@ function enter() {
         const pname2 = getUsernameById(id2, databasePlayer)
         const databaseWordlist = ipcRenderer.sendSync('getdataWordlist');
         const result = getWordsBySessionId(ids, databaseWordlist)
-        console.log(result)
 
         const check = checkWordExists(wordInput, result)
 
         if (wordInput.length < 2) {
-            console.log(wordInput.length)
             message.textContent = 'Слово не может быть меньше чем из 2х букв!'
             message.style.color = 'red';
             return
@@ -82,7 +80,6 @@ function enter() {
             message.style.color = 'red';
             return
         } else if (check === true) {
-            console.log(wordInput.length)
             message.textContent = 'Такое слово уже есть!'
             message.style.color = 'red';
             return
@@ -90,17 +87,12 @@ function enter() {
             message.textContent = 'Great!'
             message.style.color = 'green';
             const dlinaBDwordlist = databaseWordlist.length
-
             const wordId = dlinaBDwordlist + 1
-
             const playerId = getIdByUsername(playerName, databasePlayer)
-
-            console.log(databaseWordlist)
             if (playerName === pname1) {
                 const text1 = 'INSERT INTO wordlist(word_id, word, session_id, player_id) VALUES($1, $2, $3, $4) RETURNING *'
                 const values1 = [`${wordId}`, `${wordInput}`, `${ids}`, `${playerId}`]
                 const word = ipcRenderer.sendSync('pushWord', text1, values1);
-                console.log(word, 'ok1')
                 const databaseWordlist2 = ipcRenderer.sendSync('getdataWordlist');
                 const result2 = getWordsBySessionId(ids, databaseWordlist2)
                 displayWords(result2, playerName)
@@ -110,7 +102,6 @@ function enter() {
                 const text1 = 'INSERT INTO wordlist(word_id, word, session_id, player_id) VALUES($1, $2, $3, $4) RETURNING *'
                 const values1 = [`${wordId}`, `${wordInput}`, `${ids}`, `${playerId}`]
                 const word = ipcRenderer.sendSync('pushWord', text1, values1);
-                console.log(word, 'ok2')
                 const databaseWordlist2 = ipcRenderer.sendSync('getdataWordlist');
                 const result2 = getWordsBySessionId(ids, databaseWordlist2)
                 displayWords(result2, playerName)

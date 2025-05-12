@@ -8,7 +8,6 @@ function create() {
         const text = 'INSERT INTO session(session_id, password) VALUES($1, $2) RETURNING *'
         const values = [`${dlinaBD}`, `${creatPasswordInput}`]
         const ok = ipcRenderer.sendSync('pushSession', text, values);
-        console.log(ok)
     })
 }
 

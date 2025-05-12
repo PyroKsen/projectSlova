@@ -42,7 +42,6 @@ const dataSessionFu = () => {
 
 ipcMain.on('getdataBaseSession', async (event) => {
   const dataSession = await dataSessionFu();
-  console.log(dataSession);
   event.returnValue = dataSession;
 });
 
@@ -62,7 +61,6 @@ const dataPlayerFu = () => {
 
 ipcMain.on('getdataBasePlayer', async (event) => {
   const dataSession = await dataPlayerFu();
-  console.log(dataSession);
   event.returnValue = dataSession;
 });
 
@@ -88,7 +86,6 @@ const dataPlayerSessionFu = (sessionId) => {
 
 ipcMain.on('getdataBasePlayerSession', async (event, sessionId) => {
   const dataSession = await dataPlayerSessionFu(sessionId);
-  console.log(dataSession);
   event.returnValue = dataSession;
 });
 
@@ -142,7 +139,6 @@ const dataWordlistFu = () => {
 
 ipcMain.on('getdataWordlist', async (event) => {
   const dataSession = await dataWordlistFu();
-  console.log(dataSession);
   event.returnValue = dataSession;
 });
 
@@ -161,7 +157,6 @@ const dataWorldBySessionFu = (sessionId) => {
 
 ipcMain.on('getdataWorldBySession', async (event, sessionId) => {
   const dataSession = await dataWorldBySessionFu(sessionId);
-  console.log(dataSession);
   event.returnValue = dataSession;
 });
 
@@ -175,7 +170,6 @@ const dataPlayersByIdFu = (playerid) => {
 
 ipcMain.on('getdataPlayersById', async (event, playerid) => {
   const dataSession = await dataPlayersByIdFu(playerid);
-  console.log(dataSession);
   event.returnValue = dataSession;
 });
 

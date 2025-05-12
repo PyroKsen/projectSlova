@@ -26,13 +26,11 @@ function setupEventListener() {
                 messageDiv.style.color = 'green';
                 const sesId = ipcRenderer.sendSync('getSesId', idInput);
                 inButton.disabled = false
-                console.log(sesId)
             } else if (sessionEntry.password === passwordInput.trim()) {
                 messageDiv.textContent = 'Верно';
                 messageDiv.style.color = 'green';
                 const sesId = ipcRenderer.sendSync('getSesId', idInput);
                 inButton.disabled = false
-                console.log(sesId)
             } else {
                 inButton.disabled = true
                 messageDiv.textContent = `Почти верно, только пароль к этому ID: ${sessionEntry.password}`;

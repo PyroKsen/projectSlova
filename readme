@@ -3,10 +3,43 @@
 Перцев Вадим 03.23 ИСИП.ОФ.11 - программист (frontend)
 Блохин Владислав 03.23 ИСИП.ОФ.11 - проект менеджер
 
-для запуска проекта нужно иметь локальную бд
-в консоли:
-make setup
-make start
-
-Ссылка на презентацию
+Ссылка на презентацию:
 https://docs.google.com/presentation/d/1d2PQCoTmIzZjPTQXwrDEdIjQDELjdDkIGTutiNchMi4/edit?usp=sharing
+
+В консоли для старта:
+make setup
+
+Также нужна локальная бд posgreSQL:
+Для её создания нужен суперпользователь с именем "admin" и паролем "123" (можно поменять в main.js):
+CREATE ROLE admin WITH LOGIN SUPERUSER PASSWORD '123';
+
+Создаёте базу данных с именем slovadb
+Заходите в базу данных:
+psql -h localhost -p 5432 -U admin  -d slovadb
+
+Создаёте все таблицы в ней:
+CREATE TABLE player (
+    player_id SERIAL PRIMARY KEY,
+    userName varchar(255) not null
+); 
+
+CREATE TABLE session (
+    session_id SERIAL PRIMARY KEY,
+    password varchar(255)
+);
+
+CREATE TABLE player_session (
+    player_id INT REFERENCES player(player_id),
+    session_id INT REFERENCES session(session_id),
+    PRIMARY KEY (player_id, session_id)
+);
+
+CREATE TABLE wordlist (
+    word_id serial primary key,
+    word VARCHAR(255) NOT NULL,
+    session_id INT NOT NULL REFERENCES session(session_id),
+    player_id INT NOT NULL REFERENCES player(player_id)
+);
+
+После этого можно запускать приложение:
+make start
